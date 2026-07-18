@@ -64,4 +64,13 @@ class User extends Authenticatable implements PasskeyUser, MustVerifyEmail
 
         return Str::substr($this->firstname, 0, 1) . Str::substr($this->lastname, 0, 1);
     }
+
+    /**
+     * Get the user's fullname
+     */
+
+    public function getNameAttribute (): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
 }

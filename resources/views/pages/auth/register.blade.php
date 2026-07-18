@@ -9,14 +9,31 @@
             @csrf
             <!-- Name -->
             <flux:input
-                name="name"
-                :label="__('Name')"
-                :value="old('name')"
+                name="firstname"
+                :label="__('Firstname')"
+                :value="old('firstname')"
                 type="text"
                 required
                 autofocus
-                autocomplete="name"
-                :placeholder="__('Full name')"
+                :placeholder="__('Firstname')"
+            />
+
+            <flux:input
+                name="lastname"
+                :label="__('Lastname')"
+                :value="old('lastname')"
+                type="text"
+                required
+                :placeholder="__('Lastname')"
+            />
+
+            <flux:input
+                name="username"
+                :label="__('Username')"
+                :value="old('username')"
+                type="text"
+                required
+                :placeholder="__('Username')"
             />
 
             <!-- Email Address -->

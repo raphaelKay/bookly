@@ -1,0 +1,26 @@
+# Initialize a local Git repository
+git init
+
+# Stage all allowed project files
+git add .
+
+# Commit the files locally
+git commit -m "Initial commit"
+
+# Rename the default branch to main
+git branch -M main
+
+# Link your local repository to GitHub
+git remote add origin git@github.com:your-username/your-repository-name.git
+
+# Push the code to GitHub
+git push -u origin main
+git push -u origin main --force
+
+# Error checking
+ssh -T git@github.com
+git remote -v
+
+# Using gh to create new repo from CLI
+gh auth login
+gh repo create makola-commerce --public --source=. --remote=origin --push

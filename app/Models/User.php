@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -14,10 +14,14 @@ use Illuminate\Support\Str;
 use Laravel\Fortify\Contracts\PasskeyUser;
 use Laravel\Fortify\PasskeyAuthenticatable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use App\Traits\HasUIdentity;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @property int $id
- * @property string $name
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $username
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string $password
@@ -28,12 +32,14 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['user_uidentity', 'firstname', 'lastname', 'username', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
-class User extends Authenticatable implements PasskeyUser
+class User extends Authenticatable implements PasskeyUser, MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
+    use HasFactory, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable, HasUIdentity, HasRoles;
+
+    protected $uidentity_column = 'user_uidentity';
 
     /**
      * Get the attributes that should be cast.
@@ -53,10 +59,9 @@ class User extends Authenticatable implements PasskeyUser
      */
     public function initials(): string
     {
-        $initials = Str::initials($this->name, true);
+        // $initials = Str::initials($this->name, true);
+        // return Str::length($initials) > 1 ? Str::substr($initials, 0, 1).Str::substr($initials, -1) : $initials;
 
-        return Str::length($initials) > 1
-            ? Str::substr($initials, 0, 1).Str::substr($initials, -1)
-            : $initials;
+        return Str::substr($this->firstname, 0, 1) . Str::substr($this->lastname, 0, 1);
     }
 }

@@ -19,4 +19,25 @@ class PageController extends Controller
             // ...
         ]);
     }
+
+    public function privacy(Request $request)
+    {
+        return view('privacy', [
+            // ...
+        ]);
+    }
+
+    public function terms(Request $request)
+    {
+        return view('terms', [
+            // ...
+        ]);
+    }
+
+    public function contact(Request $request)
+    {
+        return view('contact', [
+            // ...
+        ]);
+    }
 }

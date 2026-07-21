@@ -14,6 +14,10 @@ Route::group(['prefix' => '', 'as' => '', 'middleware' => []], function() {
             
             return auth()->check() ? redirect()->route('verification.notice') : $controller->index(request());
         })->name('home');
+
+        Route::get('privacy', 'privacy')->name('privacy');
+        Route::get('terms', 'terms')->name('terms');
+        Route::get('contact', 'contact')->name('contact');
     });
 });
 

@@ -35,16 +35,16 @@
 
     	{{ $slot }}
 
-    	<div class="">
+    	<div class="mt-16">
     		<footer class="wrapper text-sm flex items-center justify-between py-4">
     			<div class="">
     				<p class="text-sm">&copy; {{ date('Y') }} {{ config('app.name', 'Bookly') }}. All Rights Reserved.</p>
     			</div>
 
     			<div class="flex items-center gap-4">
-    				<a href="">Privacy</a>
-    				<a href="">Terms</a>
-    				<a href="">Contact</a>
+    				<a href="{{ route('privacy') }}">Privacy</a>
+    				<a href="{{ route('terms') }}">Terms</a>
+    				<a href="{{ route('contact') }}">Contact</a>
     			</div>
     		</footer>
     	</div>
